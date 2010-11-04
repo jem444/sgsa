@@ -1,0 +1,224 @@
+options {
+  JDK_VERSION = "1.6";
+  STATIC = false ; 
+}
+PARSER_BEGIN(ParseCursos)
+package unioeste.ia.trabalho1.controle.parser.centro;
+
+import java.util.List;
+import java.util.ArrayList;
+import unioeste.ia.trabalho1.pojo.Curso;
+import unioeste.ia.trabalho1.pojo.Disciplina;
+import unioeste.ia.trabalho1.pojo.Serie;
+import unioeste.ia.trabalho1.pojo.Professor;
+import unioeste.ia.trabalho1.pojo.Periodo;
+import unioeste.ia.trabalho1.controle.facade.impl.FacadeAlocacaoImpl;
+
+public class ParseCursos {
+
+	private List<Serie> listaSerie = new ArrayList<Serie>();
+	private List<Curso> listaCurso = new ArrayList<Curso>();
+	private List<Disciplina> listaDisciplina = new ArrayList<Disciplina>();
+	private List<Professor> listaProfessor = new ArrayList<Professor>();
+
+    public void setListaSerie(List<Serie> listaSerie) {
+		this.listaSerie = listaSerie;
+	}
+
+	public List<Serie> getListaSerie() {
+		return listaSerie;
+	}
+
+	public void setListaCurso(List<Curso> listaCurso) {
+		this.listaCurso = listaCurso;
+	}
+
+	public List<Curso> getListaCurso() {
+		return listaCurso;
+	}
+
+	public void setListaDisciplina(List<Disciplina> listaDisciplina) {
+		this.listaDisciplina = listaDisciplina;
+	}
+
+	public List<Disciplina> getListaDisciplina() {
+		return listaDisciplina;
+	}
+
+	public void setListaProfessor(List<Professor> listaProfessor) {
+		this.listaProfessor = listaProfessor;
+	}
+
+	public List<Professor> getListaProfessor() {
+		return listaProfessor;
+	}
+}
+PARSER_END(ParseCursos)
+TOKEN_MGR_DECLS:{
+  static int countLexError = 0;
+  public int foundLexError(){
+    return countLexError;
+  }
+}
+
+SKIP:
+{
+        <"/*" (~["\n"])* "\n">
+}
+
+SKIP :
+{
+  " "
+  | "\t"
+  | "\n"
+  | "\r"
+  | "\f"
+}
+TOKEN : 
+{
+	< LETRA: ["a" - "z" , "A" - "Z"] >
+|   < SIMBOLO:["ç","á","é","í","ó","ú","ã","õ","ü","à","ê","â","ô"]>
+|	< IDENTIFICADOR: <LETRA> ( <LETRA> | <DIGIT>|<ESPACO>|<SIMBOLO> )* >
+|   < SERIE: <DIGIT><LETRA> >
+|   < CONSTANTE: ( <DIGIT> )+ >
+|   < DIGIT: ["0" - "9"] >
+|   < ESPACO:[" "]>
+
+}
+
+String serie():
+{
+	Token t;
+}
+{
+	t = <SERIE>
+	{
+		return t.image;
+	}
+}
+
+Integer qtdSerie():
+{
+    Token t;
+}
+{
+	t = <CONSTANTE>
+	{
+		return Integer.parseInt(t.image);
+	}
+}
+
+Integer qtdDisciplina() :
+{
+ Token t;
+}
+{
+	t = <CONSTANTE>
+	{
+		return Integer.parseInt(t.image);
+	}
+}
+
+Integer qtdAulas() :
+{
+ Token t;
+}
+{
+	t = <CONSTANTE>
+	{
+		return Integer.parseInt(t.image);
+	}
+}
+
+String disciplina():
+{
+	Token t;
+}
+{
+	t = <IDENTIFICADOR>
+	{
+		return t.image;
+	}
+}
+
+String professor():
+{
+	Token t;
+}
+{
+	t = <IDENTIFICADOR>
+	{
+		return t.image;
+	}
+}
+
+
+String curso() :
+{	Token t;
+}
+{  	t = <IDENTIFICADOR>
+	{	return t.image;
+	}
+}
+
+void load():
+{
+}{   (loadTudo())*
+}
+
+void loadTudo():{
+    	 String nmSerie = " ";
+		 String nmCurso = " ";
+		 String nmDisciplina = " ";
+		 String nmProfessor = " ";
+		 		 
+		 Integer quantidade_matricula = 0;
+		 Integer quantidade_aula = 0;
+		 Integer quantidade_matriculado_serie = 0;}
+{        nmSerie = serie() ", " nmCurso = curso() ", " quantidade_matriculado_serie = qtdSerie() ", " nmDisciplina = disciplina() ", " quantidade_matricula = qtdDisciplina() ", " quantidade_aula = qtdAulas() ", " nmProfessor = professor() "."
+    	{
+		
+
+		Serie serie = new Serie();
+		Curso curso = new Curso();
+		Disciplina disciplina = new Disciplina();
+		Professor professor = new Professor();
+
+		serie.setNmSerie(nmSerie);
+		serie.setQuantidade_matriculado_serie(quantidade_matriculado_serie);
+		serie.setCd_serie(listaSerie.size());
+		serie.setPeriodo(Periodo.INTEGRAL);
+		
+		serie.setNu_serie(Integer.valueOf(nmSerie.charAt(0))-48);
+		
+		curso.setNmCurso(nmCurso);
+		curso.setCd_curso(listaCurso.size()+1);
+		curso.getListaSerie().add(serie);
+		curso.setPeriodo(Periodo.INTEGRAL);
+
+		serie.setCurso(curso);
+
+		disciplina.setNmDisciplina(nmDisciplina);
+		disciplina.setQuantidade_aula(quantidade_aula);
+		disciplina.setQuantidade_matricula(quantidade_matricula);
+		disciplina.setSerie(serie);
+		disciplina.setCurso(curso);
+		disciplina.setCd_disciplina(listaDisciplina.size()+1);		
+		
+		serie.getListaDisciplina().add(disciplina);
+
+		professor.setNm_professor(nmProfessor);
+		//professor.getListaDisciplina().add(disciplina);
+		//professor.getListaCurso().add(curso);
+		//professor.getListaSerie().add(serie);
+		professor.setCd_professor(listaProfessor.size()+1);
+
+
+		disciplina.setProfessor(professor);
+
+		listaCurso.add(curso);
+		listaSerie.add(serie);
+		listaDisciplina.add(disciplina);
+		listaProfessor.add(professor);
+    }
+}
