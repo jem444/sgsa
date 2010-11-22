@@ -1,0 +1,6 @@
+1o,EE,38,Cálculo,49,4,Valmei
+1o,EE,38,Computação,52,4,Habib
+2o,EE,34,Cálculo Vetorial e Variáveis Complexas,32,4,Valmei
+2o,EE,34,Circuitos Elétricos,35,4,Waldimir
+3o,EE,25,Análise de Sistemas Dinâmicos,25,4,Geraldo
+3o,EE,25,Cálculo Numérico,23,3,TS

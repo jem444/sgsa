@@ -1,0 +1,4 @@
+1o, CC, 60, Cálculo, 55, 5, Prof01.
+1o, CC, 60, Física, 55, 3, Prof02.
+2o, CC, 45, Cálculo Numérico, 55, 4, Prof02.
+2o, CC, 45, Redação, 55, 5, Prof03.
