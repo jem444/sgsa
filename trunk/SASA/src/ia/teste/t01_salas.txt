@@ -1,0 +1,6 @@
+sala01, 40.
+sala02, 40.
+sala03, 40.
+sala04, 40.
+sala05, 40.
+sala06, 40.
