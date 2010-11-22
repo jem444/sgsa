@@ -1,6 +1,0 @@
-sala1, 60.
-sala2, 40.
-sala3, 80.
-sala4, 40.
-sala5, 62.
-sala6, 50.
