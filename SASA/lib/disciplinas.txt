@@ -1,0 +1,143 @@
+1o,EE,38,Cálculo,49,4,Valmei
+1o,EE,38,Computação,52,4,Habib
+1o,EE,38,Desenho Técnico,42,2,Muniz
+1o,EE,38,Física I,46,4,Daniel
+1o,EE,38,Geometria Analítica e Álgebra Linear,43,4,TS
+1o,EE,38,Introdução à Engenharia Elétrica,40,2,Juan
+1o,EE,38,Laboratório de Física - Turma A,15,2,Rosiney
+1o,EE,38,Laboratório de Física - Turma B,15,2,Rosiney
+1o,EE,38,Laboratório de Física - Turma C,16,2,Rosiney
+1o,EE,38,Química Tecnológica e Materiais Elétricos,55,4,Nora
+2o,EE,34,Cálculo Vetorial e Variáveis Complexas,32,4,Valmei
+2o,EE,34,Circuitos Elétricos,35,4,Waldimir
+2o,EE,34,Equações Diferenciais,29,3,TS
+2o,EE,34,Física II,34,4,Fernanda
+2o,EE,34,Laboratório de Instrumentação,30,2,Lobão
+2o,EE,34,Mecânica Geral,35,4,Carlos A
+2o,EE,34,Probabilidade e Estatística,39,3,Carlos S
+3o,EE,25,Análise de Sistemas Dinâmicos,25,4,Geraldo
+3o,EE,25,Cálculo Numérico,23,3,TS
+3o,EE,25,Eletromagnetismo e Conversão Eletromecânica de Energia,26,4,Concurso1
+3o,EE,25,Eletrônica Básica,24,4,Lobão
+3o,EE,25,Energia Meio Ambiente e Desenvolvimento Sustentável,22,2,Hayrton
+3o,EE,25,Engenharia de Segurança Legislação e Ética Profissional,28,2,Muniz
+3o,EE,25,Fenômenos de Transporte,29,2,TS
+3o,EE,25,Medidas Elétricas,25,2,TS
+3o,EE,25,Sistemas Digitais e Microprocessadores,23,4,Pantaleão
+4o,EE,25,Aspectos de Segurança,20,3,Muniz
+4o,EE,25,Conserv e Aproveitamento dos Recursos Naturais,19,3,Hayrton
+4o,EE,25,Eletricidade Industrial II,22,4,Juliano
+4o,EE,25,Engenharia Econômica,18,3,Vivian
+4o,EE,25,Introdução a Sistemas de Energia Elétrica I,25,4,Lotero
+4o,EE,25,Máquinas Elétricas II,30,4,Waldimir
+4o,EE,25,Sistemas de Controle I,29,4,Romeu
+4o,EE,25,Sistemas Industriais,27,4,TS
+5o,EE,13,Identificação de Sistemas,19,4,TS
+5o,EE,13,Laboratório de Aplicação de Microprocessadores,10,4,Kauati
+5o,EE,13,Redes de Computadores e Sistemas Distribuídos,11,4,Pantaleão
+5o,EE,13,Máquinas Inteligentes,9,4,Carlos H
+5o,EE,13,Aterramento de Sistemas Elétricos,12,4,José G
+5o,EE,13,Distribuição de Energia Elétrica,15,4,Rocha
+5o,EE,13,Operação de Sistemas de Potência,12,4,Robson
+5o,EE,13,Técinas de Alta Tensão,10,4,Tácio
+5o,EE,13,Transmissão de Energia Elétrica,13,4,Rocha
+1o,CC,38,Cálculo Diferencial e Integral,40,4,Zalewski
+1o d,CC,38,Cálculo Diferencial e Integral Desdobramento,17,4,Zalewski
+1o,CC,38,Computação I,40,5,Teresinha
+1o d,CC,38,Computação I Desdobramento,15,5,Andres
+1o,CC,38,Física Geral e Eletricidade Básica,43,4,Fernanda
+1o d,CC,38,Física Geral e Eletricidade Básica Desdobramento,23,4,Rosiney
+1o,CC,38,Geometria Analítica e Álgebra Linear,40,4,Cleverson
+1o d,CC,38,Geometria Analítica e Álgebra Linear Desdobramento,21,4,Cleverson
+1o,CC,38,Introdução à Ciência da Computação,80,2,Renato
+1o,CC,38,Lógica e Matemática Discreta,43,3,Wagner
+1o,CC,38,Probabilidade e Estatística,56,2,Carlos S
+2o,CC,25,Algoritmos e Estruturas de Dados,25,4,Andres
+2o,CC,25,Introdução à Arquitetura de Computadores,30,3,Zalewski
+2o,CC,25,Cálculo Numérico,29,3,André
+2o,CC,25,Computação II,20,4,Rômulo
+2o,CC,25,Linguagens Formais e Autômatos,29,2,Rômulo
+2o d,CC,25,Linguagens Formais e Autômatos Desdobramento,9,2,Rômulo
+2o,CC,25,Técnicas de Redação e Metodologia Científica,30,4,Leonilda
+2o,CC,25,Sistemas Digitais,10,4,Carlos F
+3o,CC,24,Projeto e Análise de Algoritmos,27,3,Rômulo
+3o,CC,24,Organização e Arquitetura de Computadores,20,3,Fabiana
+3o,CC,24,Banco de Dados,26,3,Gil
+3o,CC,24,Compiladores,16,2,Wagner
+3o,CC,24,Engenharia de Software I,29,4,Gil
+3o,CC,24,Formação Empreendedora,26,4,Shiro
+3o,CC,24,Sistemas Operacionais,34,4,Shiro
+4o,CC,17,Computação Gráfica,12,4,Fabiana
+4o,CC,17,Engenharia de Software II,14,4,Eliane
+4o,CC,17,Inteligência Artificial 1o Sem,25,4,Huei
+4o,CC,17,XML: Fundamentos e Aplicações,15,4,Rômulo
+4o,CC,17,Sistemas Distribuídos,16,4,Wagner
+4o,CC,17,Sistemas de Informação,18,4,André
+1o,MA,44,A Informática Aplicada à Educação Matemática,40,3,Fábio
+1o,MA,44,Cálculo I,45,6,Claiton
+1o,MA,44,Geometria Analítica,42,2,Kelly
+1o,MA,44,Geometria Euclidiana,46,4,Marli
+1o,MA,44,Matemática Finita,43,4,Fernando
+1o,MA,44,Prática de Ensino I,43,4,Fábio
+2o,MA,30,Álgebra Linear,29,4,Fernando
+2o,MA,30,Cálculo II,26,4,Orlando
+2o,MA,30,Desenho Geométrico,27,2,Emerson
+2o,MA,30,Didática Aplicada ao Ensino da Matemática,30,2,Fábio
+2o,MA,30,Políticas Educacionais,29,2,Marli
+2o,MA,30,Prática de Ensino II,32,4,Fábio
+2o,MA,30,Psicologia Aplicada à Educação Matemática,35,2,Alguém
+3o,MA,15,Análise Real,19,4,Orlando
+3o,MA,15,Estruturas Algébricas,23,4,Emerson
+3o,MA,15,Optativa - Programação Linear 1a Parte,11,2,Emerson
+3o,MA,15,Optativa - Programação Linear 2a Parte,11,2,Claiton
+3o,MA,15,Optativa - Matemática para as Séries Iniciais 1a Parte,10,2,Renata
+3o,MA,15,Optativa - Matemática para as Séries Iniciais 2a Parte,10,2,José R
+3o,MA,15,Variáveis Complexas,15,2,Claiton
+4o,MA,17,Cálculo III,15,4,Fernando
+4o,MA,17,Cálculo Numérico,17,4,Emerson
+4o,MA,17,Estatística Aplicada à Educação Matemática,19,2,Carlos S
+4o,MA,17,Física,12,4,Daniel
+1o,EM,38,Cálculo,49,4,Salinas
+1o,EM,38,Computação,52,4,Habib
+1o,EM,38,Física I,42,3,Daniel
+1o,EM,38,Geometria Analítica e Álgebra Linear,46,4,Salinas
+1o,EM,38,Geometria Descritiva e Desenho Técnico 1o Sem,43,5,Muniz
+1o,EM,38,Geometria Descritiva e Desenho Técnico 2o Sem,43,5,TS
+1o,EM,38,Introdução à Engenharia Mecânica,40,2,Juan
+1o,EM,38,Laboratório de Física I - Turma A,21,2,Rosiney
+1o,EM,38,Laboratório de Física I - Turma B,21,2,Rosiney
+1o,EM,38,Química Geral e Tecnológica,40,3,Nora
+1o,EM,38,Química Geral e Tecnológica Desdobramento,22,3,Mires
+2o,EM,30,Cálculo Vetorial,32,4,Valmei
+2o,EM,30,Equações Diferenciais,35,3,Salinas
+2o,EM,30,Física II,29,3,Fernanda
+2o,EM,30,Laboratório de Física II - Turma A,15,2,Rosiney
+2o,EM,30,Laboratório de Física II - Turma B,14,2,Rosiney
+2o,EM,30,Materiais de Construção Mecânica,35,4,Moreira
+2o,EM,30,Mecânica - Estática e Dinâmica,39,4,Samuel
+2o,EM,30,Probabilidade e Estatística,38,3,Carlos S
+2o,EM,30,Termodinâmica,29,4,Burin
+3o,EM,26,Análise de Sistemas Dinâmicos e Vibrações,25,4,Samuel
+3o,EM,26,Cálculo Numérico,23,3,Krauskopf
+3o,EM,26,Circuitos Elétricos e Eletrotécnica para Eng Mecânica,26,3,Carlos F
+3o,EM,26,Mecânica dos Fluidos,24,4,Salinas
+3o,EM,26,Mecânica dos Sólidos,22,4,Gustavo
+3o,EM,26,Processos de Usinagem,28,4,Camilo
+3o,EM,26,Transferência de Calor,29,4,Marra
+3o,EM,26,Materiais de Construção Mecânica 2o Sem 2009,25,2,Moreira
+4o,EM,24,Processos de Soldagem,20,4,Maksoel
+4o,EM,24,Fadiga,19,4,Gustavo
+4o,EM,24,Máquinas de Fluxo I,22,3,TS
+4o,EM,24,Acionamentos Elétricos,18,4,Tochetto
+4o,EM,24,Marketing Pessoal e Planos de Negócios em Engenharia,25,4,Luis F
+4o,EM,24,Mecânica dos Fluidos Aplicada,29,4,Diniz
+4o,EM,24,Mecânica dos Fluidos II (2009),27,2,Salinas
+4o,EM,24,Processos de Conformação,25,2,TS
+4o,EM,24,Mecanismos e Elementos de Máquinas I,16,4,Camilo
+5o,EM,13,Engenharia de Superfícies,14,4,Gustavo
+5o,EM,13,Máquinas Térmicas II,15,3,Dechechi
+5o,EM,13,Experimentos em Sistemas Térmicos,13,4,Maximiliano
+5o,EM,13,Recursos Humanos em Engenharia,19,4,Liliana
+5o,EM,13,Engenharia: Geração de Ideias e Criatividade,10,4,Juan
+5o,EM,13,Mecânica dos Fluidos Aplicada,11,4,Diniz
+5o,EM,13,Engenharia de Manutenção,12,4,Moreira
