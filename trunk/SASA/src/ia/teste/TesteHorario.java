@@ -5,7 +5,9 @@ import java.util.Vector;
 import ia.infra.negocio.curso.Curso;
 import ia.infra.negocio.curso.Disciplina;
 import ia.infra.negocio.curso.Professor;
+import ia.infra.negocio.curso.Serie;
 import ia.infra.negocio.horario.Atividade;
+import ia.infra.negocio.horario.HorarioSerie;
 import ia.infra.negocio.horario.ModeloHorario;
 import ia.infra.negocio.sala.Sala;
 
@@ -62,6 +64,25 @@ public class TesteHorario {
 		semana[2][0] = (Atividade)d01.getAulas().get(2);
 		semana[3][0] = (Atividade)d01.getAulas().get(3);
 	}
+	
+	public Vector<HorarioSerie> getAllHorarioSerie() {
+		Vector<HorarioSerie> horarios_serie = new Vector<HorarioSerie>();
+		Serie serie1 = new Serie(1);
+		serie1.setDisciplinas(disciplinas);
+		Vector<Serie> series = new Vector<Serie>();
+		series.add(serie1);
+		Curso curso = new Curso("Ciencia da Computação");
+		curso.setSeries(series);
+		
+		HorarioSerie horario = new HorarioSerie();
+		horario.setCurso(curso);
+		horario.setSerie(serie1);
+		horario.setSemana(semana);
+		
+		horarios_serie.add(horario);
+		return horarios_serie;
+	}
+	
 
 	public ModeloHorario getModeloHorario() {
 		return modeloHorario;
