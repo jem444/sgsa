@@ -5,6 +5,8 @@ import ia.infra.negocio.sala.Sala;
 
 import java.util.Vector;
 
+import com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter;
+
 public class Disciplina {
 	private int id;
 	private String nome;
@@ -49,7 +51,7 @@ public class Disciplina {
 	
 	@Override
 	public String toString() {
-		return "Nome: "+ nome+ "Professor: "+ professor+ "qtd: "+ numeroDeMatriculados+ "Aulas: "+ aulas.toString();
+		return "Disc: "+ this.nome;
 	}
 
 
@@ -135,7 +137,6 @@ public class Disciplina {
 	public String getNomeAbbr() {
 		return nomeAbbr;
 	}
-
 	
 	
 }

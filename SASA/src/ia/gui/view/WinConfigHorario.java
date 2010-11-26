@@ -2,29 +2,43 @@ package ia.gui.view;
 
 
 import ia.gui.infra.Erro;
+import ia.gui.view.GridHorarioEditarInternalFrame.MyComboBoxEditor;
+import ia.gui.view.GridHorarioEditarInternalFrame.SimpleTableModel;
 import ia.infra.negocio.curso.Curso;
+import ia.infra.negocio.curso.Disciplina;
 import ia.infra.negocio.curso.Serie;
 import ia.infra.negocio.horario.Atividade;
+import ia.infra.negocio.horario.Aula;
+import ia.infra.negocio.horario.HorarioSerie;
 import ia.infra.negocio.horario.ModeloHorario;
-import ia.teste.TesteHorario;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
+import javax.swing.AbstractCellEditor;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 
 public class WinConfigHorario extends JDialog implements ActionListener {
@@ -36,12 +50,13 @@ public class WinConfigHorario extends JDialog implements ActionListener {
 	protected JLabel lblAdicionar;
 	
 	protected ModeloHorario horario;
-
+	protected Vector<HorarioSerie> horarios;
 	
 	
 	public WinConfigHorario(MainWindow owner) {
 		super(owner, "Configuração de horários");
 		this.owner = owner;
+		this.horarios = owner.getAllHorarioSerie();
 
 		JTabbedPane tabled = new JTabbedPane();
 		
@@ -92,14 +107,25 @@ public class WinConfigHorario extends JDialog implements ActionListener {
 		
 		tab2Panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		tab2Panel.add(loggedClientPanel, BorderLayout.CENTER);
+		
+		
+		// ----- TAB 3: Cursos
+		JPanel tab3Panel = new JPanel(new BorderLayout());
+		JPanel tab3CusosPanel = new JPanel(new BorderLayout());
+		
+		tab3CusosPanel.add(new JScrollPane(this.getCursosTable()), BorderLayout.CENTER);
+		
+		tab3Panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		tab3Panel.add(tab3CusosPanel, BorderLayout.CENTER);
 
 		
 		// ---------------
 		tabled.add(tab1Panel, "Grade");
-		tabled.add(tab2Panel, "Cursos");
+		tabled.add(tab2Panel, "Horários");
+		tabled.add(tab3Panel, "Cursos");
 		
 		this.add(tabled);
-		
+		this.setAlwaysOnTop(false);
 		this.setSize(600, 500);
 
 	}
@@ -130,60 +156,103 @@ public class WinConfigHorario extends JDialog implements ActionListener {
 	
 	public JTable getCursosTable() {
 		//-----------------------------------------------------------
-		String[] colunas = new String []{"Curso", "Série", "Editar"};
+		String[] colunas = new String []{"Curso", "Série", " - ", " - "};
+		
+		Object[][] linhas = gerarLinhas();
+		JTable tabela = new JTable(linhas, colunas);
+		tabela.setCellEditor(new ButtonColumn(tabela, new int[]{2, 3}));
+			
+		return tabela;
+	}
+	
+	private Object[][] gerarLinhas() {
 
-		
-		Vector<Curso> cursos = owner.getCursos();
-		
-		int size = 0;
-		
 		try {
-			for (Curso curso: cursos)
-				size += curso.getSeries().size();
-			
-			Object[][] linhas = new Object[size][3];
-
+			Object[][] linhas = new Object[horarios.size()][4];
 			int k = 0;
-			for (Curso curso: cursos) {
-				for (Serie serie : curso.getSeries()) {
-					linhas[k][0] = curso.getNome();
-					linhas[k][1] = serie.getOrdem();
-					k++;
-				}
+			for (HorarioSerie horario : this.horarios) {
+				linhas[k][0] = horario.getCurso().getNome();
+				linhas[k][1] = horario.getSerie().getOrdem();
+				linhas[k][2] = "Ver";
+				linhas[k][3] = "Editar";
+				k++;
 			}
-			
-			JTable tabela = new JTable(linhas, colunas);
-			//onclick = 
-			//TesteHorario t = new TesteHorario();
-			//owner.exibirHorario(t.getSemana());
 
-			return tabela;
+			return linhas;
 
 		} catch (NullPointerException e) {
-			Object[][] linhas = {{"","", ""}, {"","", ""}, {"","", ""}};
-			JTable tabela = new JTable(linhas, new String []{"Curso", "Série", "Editar"});
-			Erro.print("Não há informação das disciplinas e aulas", "Não há informação das disciplinas e aulas");
-			return tabela;
+			Object[][] linhas = {{"", "", ""}, {"", "", ""}, {"", "", ""}};
+
+			Erro.print("Erro 202:", "Não há informação das disciplinas e aulas");
+			return linhas;
 		}
+
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnAdicionar) {
-//			if (!owner.getConfigOwner().isServerOn()) {
-//				owner.getConfigOwner().listen();
-//				iniciarBtn.setText("Parar");
-//				iniciarLbl.setText("Servidor pronto para receber conexões...");
-//			} else {
-//				try {
-//					owner.getConfigOwner().serverShutdown();
-//					iniciarBtn.setText("Iniciar");
-//					iniciarLbl.setText("Servidor desligado...");
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
+
 		}
-		
 	}
+
+	class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener {
+		JTable table;
+		JButton renderButton;
+		JButton editButton;
+		String text;
+
+		public ButtonColumn(JTable table, int[] column) {
+			super();
+			this.table = table;
+			renderButton = new JButton();
+
+			editButton = new JButton();
+			editButton.setFocusPainted(false);
+			editButton.addActionListener(this);
+
+			TableColumnModel columnModel = table.getColumnModel();
+			for (int i=0; i<column.length; i++) {
+				columnModel.getColumn(column[i]).setCellRenderer(this);
+				columnModel.getColumn(column[i]).setCellEditor(this);
+			}
+		}
+
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			if (hasFocus) {
+				renderButton.setForeground(table.getForeground());
+				renderButton.setBackground(UIManager.getColor("Button.background"));
+			} else if (isSelected) {
+				renderButton.setForeground(table.getSelectionForeground());
+				renderButton.setBackground(table.getSelectionBackground());
+			} else {
+				renderButton.setForeground(table.getForeground());
+				renderButton.setBackground(UIManager.getColor("Button.background"));
+			}
+
+			renderButton.setText( (value == null) ? "" : value.toString() );
+			return renderButton;
+		}
+
+		public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+			text = (value == null) ? "" : value.toString();
+			editButton.setText( text );
+			return editButton;
+		}
+
+		public Object getCellEditorValue(){
+			return text;
+		}
+
+		public void actionPerformed(ActionEvent e){
+			fireEditingStopped();
+//			System.out.println(e.getActionCommand() + " : " + table.getSelectedRow());
+			if (table.getSelectedColumn() == 2) {
+				owner.exibirHorario(horarios.get(table.getSelectedRow()));
+			} else {
+				owner.editarHorario(horarios.get(table.getSelectedRow()));
+			}
+		}
+	}
+
 }

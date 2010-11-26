@@ -2,11 +2,14 @@ package ia.gui.view;
 
 import ia.infra.algoritmo.BuscaProfundidade;
 import ia.infra.negocio.curso.Curso;
+import ia.infra.negocio.curso.Disciplina;
 import ia.infra.negocio.curso.Serie;
 import ia.infra.negocio.horario.Atividade;
+import ia.infra.negocio.horario.HorarioSerie;
 import ia.infra.negocio.sala.Sala;
 import ia.io.curso.ParserCurso;
 import ia.io.sala.ParserSala;
+import ia.teste.TesteHorario;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -42,7 +45,7 @@ public class MainWindow extends JFrame {
 	private JMenu mArquivo, mEditar, mExibir, mOrganizar, mJanelas;
 	private JMenuItem mArquivoAbrir, mArquivoSalvar, mArquivoImprimir, mArquivoCarregarSalas, 
 					  mArquivoCarregarDisciplinas, mArquivoImportarHorário, mArquivoSair;
-	private JMenuItem mEditarConfigurarGradeHorario, mEditarConfigurarHorario, mListarClientes, mListarDVDsVenda;
+	private JMenuItem mEditarConfigurarGradeHorario, mEditarConfigurarHorario, mEditarHorario, mExibirHorario;
 	private JMenuItem mExibirSalas, mExibirCursos;
 	private JMenuItem mAplicarBuscaExaustiva, mAplicarBuscaHeuristica;
 //	private JTextArea editor, console;
@@ -50,6 +53,7 @@ public class MainWindow extends JFrame {
 	private Vector<JInternalFrame> janelas;
 	private JInternalFrame janelaSalas;
 	private JMenuItem item;
+	
 	private Atividade[][] semana;
 
 	private Point nextInitInternalFrame = new Point(5, 5);
@@ -61,6 +65,7 @@ public class MainWindow extends JFrame {
 //	private File arquivoDisciplinas, arquivoSalas;
 	private Vector<Curso> cursos;
 	private Vector<Sala> salas;
+	private Vector<HorarioSerie> horarios_serie;
 
 	
 	public MainWindow(){
@@ -68,6 +73,7 @@ public class MainWindow extends JFrame {
 		
 		desktop = new JDesktopPane();
 		janelas = new Vector<JInternalFrame>();
+		horarios_serie = new Vector<HorarioSerie>();
 		
 		this.getContentPane().setLayout(new GridLayout(0, 1));
 		this.getContentPane().add(desktop);
@@ -104,7 +110,7 @@ public class MainWindow extends JFrame {
 		mArquivo.add(mArquivoAbrir);
 		mArquivo.add(mArquivoCarregarSalas);
 		mArquivo.add(mArquivoCarregarDisciplinas);
-//		mArquivo.add(mArquivoImportarHorário);
+		mArquivo.add(mArquivoImportarHorário);
 		mArquivo.addSeparator();
 		mArquivo.add(mArquivoSalvar);
 		mArquivo.add(mArquivoImprimir);
@@ -140,23 +146,21 @@ public class MainWindow extends JFrame {
 		mEditarConfigurarGradeHorario.setMnemonic('D');
 		mEditarConfigurarHorario = new JMenuItem("Configurar Horário");
 		mEditarConfigurarHorario.setMnemonic('H');
-		mListarClientes = new JMenuItem("X");
-		mListarClientes.setMnemonic('C');
-		mListarDVDsVenda = new JMenuItem("y");
-		mListarDVDsVenda.setMnemonic('t');
+		mEditarHorario = new JMenuItem("Editar Horário");
+		mEditarHorario.setMnemonic('H');
+		mExibirHorario = new JMenuItem("Exibir Horário");
+		mExibirHorario.setMnemonic('r');
 
 		
 		mEditarConfigurarGradeHorario.addActionListener(controle);
 		mEditarConfigurarHorario.addActionListener(controle);
-		mListarClientes.addActionListener(controle);
-		mListarDVDsVenda.addActionListener(controle);
+		mEditarHorario.addActionListener(controle);
+		mExibirHorario.addActionListener(controle);
 		
 		mEditar.add(mEditarConfigurarGradeHorario);
 		mEditar.add(mEditarConfigurarHorario);
-		mEditar.add(mListarClientes);
-		mEditar.add(mListarDVDsVenda);
-		mListarClientes.setEnabled(false);
-		mListarDVDsVenda.setEnabled(false);
+		mEditar.add(mEditarHorario);
+		mEditar.add(mExibirHorario);
 
 		
 		//----------------------------------------------
@@ -207,7 +211,8 @@ public class MainWindow extends JFrame {
 				importarCursos();
 			} else
 			if (arg0.getSource()==mArquivoImportarHorário){
-
+				TesteHorario teste = new TesteHorario();
+				horarios_serie = teste.getAllHorarioSerie();
 			} else
 			if (arg0.getSource()==mArquivoSalvar){
 				//salvarComo();
@@ -224,18 +229,48 @@ public class MainWindow extends JFrame {
 			} else
 			if (arg0.getSource()==mAplicarBuscaHeuristica){
 				((GridSalasInternalFrame)janelaSalas).setSalas(salas);
-			}
+			} else
 			if (arg0.getSource()==mEditarConfigurarHorario){
 				chamaJanela(MainWindow.JANELA_CONFIGURA_HORARIO);
-			}
+			} else
 			if (arg0.getSource()==mEditarConfigurarGradeHorario){
 				chamaJanela(MainWindow.JANELA_CONFIGURA_GRADE_HORARIO);
-			}
+			} else
 			if (arg0.getSource()==mExibirSalas){
 				exibirHorariosSalas();
-			}
+			} else
 			if (arg0.getSource()==mExibirCursos){
 				exibirHorariosCursos();
+			} else
+			if (arg0.getSource()==mEditarHorario){
+				
+//				TesteHorario teste = new TesteHorario();
+//				semana = teste.getSemana();
+//				
+//				HorarioSerie horario = new HorarioSerie();
+//				Curso cu  = new Curso("Ciência da computação");
+//				Serie seu = new Serie(1);
+//				cu.getSeries().add(seu);
+//				horario.setHorario(semana);
+//				horario.setCurso(cu);
+//				horario.setSerie(seu);
+				
+//				editarHorario(horario);
+			} else
+			if (arg0.getSource()==mExibirHorario){
+//				TesteHorario teste = new TesteHorario();
+//				semana = teste.getSemana();
+//				
+//				HorarioSerie horario = new HorarioSerie();
+//				Curso cu  = new Curso("Ciência da computação");
+//				Serie seu = new Serie(1); 
+//				cu.getSeries().add(seu);
+//				horario.setHorario(semana);
+//				horario.setCurso(cu);
+//				horario.setSerie(seu);
+				
+				for (HorarioSerie horario : horarios_serie)
+					exibirHorario(horario);
 			}
 
 		}
@@ -253,7 +288,14 @@ public class MainWindow extends JFrame {
 
 		} else
 		if (bean.getClass().equals(Atividade[][].class)) {
-			internal = new GridHorarioInternalFrame((Atividade[][])bean, cursos, titulo, true, true, true, true);
+//			internal = new GridHorarioInternalFrame((Atividade[][])bean, cursos, titulo, true, true, true, true);
+			Vector<Disciplina> disciplinas = new Vector<Disciplina>();
+			for (Curso curso : cursos) {
+				for (Serie serie : curso.getSeries()) {
+					disciplinas.addAll(serie.getDisciplinas());
+				}
+			}
+			internal = new GridHorarioEditarInternalFrame(new HorarioSerie(), titulo, true, true, true, true);
 			
 		} else
 		if (bean.getClass().equals(Vector.class)) {
@@ -311,6 +353,63 @@ public class MainWindow extends JFrame {
 		return internal;
 	}
 	
+	private JInternalFrame addJanela(Object[] args) {
+		JInternalFrame internal = new JInternalFrame();
+		if (args.length>0) {
+			if (args[0].getClass().equals(HorarioSerie.class)) {
+				
+				//@param args[] = {HorarioSerie, String, boolean}
+				if ((Boolean)args[2]) {
+					internal = new GridHorarioEditarInternalFrame((HorarioSerie)args[0], (String)args[1], true, true, true, true);
+				} else {
+					internal = new GridHorarioExibirInternalFrame((HorarioSerie)args[0], (String)args[1], true, true, true, true);
+				}
+			}
+			
+			internal.setLocation(getNextInitInternalFrame());
+			internal.setVisible(true);
+			janelas.add(internal);
+			
+			desktop.removeAll();
+			
+			mJanelas.removeAll();
+			ActionListener listener = new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int k = 0;
+					for (JInternalFrame internalJet : janelas) {
+						if (e.getSource()==mJanelas.getMenuComponent(k)) {
+							try {
+								internalJet.setSelected(true);
+							} catch (PropertyVetoException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+						k++;
+					}
+				}
+			};
+			
+			for (JInternalFrame internalJet : janelas) {
+				//atualiza as janelas no desktop
+				desktop.add(internalJet);
+				
+				//atualiza o menu janelas
+				item = new JMenuItem(internalJet.getTitle());
+				item.addActionListener(listener);
+				mJanelas.add(item);
+			}
+			
+			try {
+				internal.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				e1.printStackTrace();
+			}			
+		}
+		return internal;
+	}
+	
 	private Point getNextInitInternalFrame() {
 		Point p = (Point)nextInitInternalFrame.clone();
 		nextInitInternalFrame.translate(15, 15);
@@ -331,6 +430,16 @@ public class MainWindow extends JFrame {
 			ParserCurso parser = new ParserCurso(new File(diretorio+arquivo));
 			try {
 				cursos = parser.getCursos();
+				
+				//cria horários em branco para cada serie
+				for (Curso curso : cursos) {
+					for (Serie serie : curso.getSeries()) {
+						HorarioSerie h = new HorarioSerie();
+						h.setCurso(curso);
+						h.setSerie(serie);
+						horarios_serie.add(h);
+					}
+				}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -376,9 +485,28 @@ public class MainWindow extends JFrame {
 		}	
 	}
 	
-	public void exibirHorario(Atividade[][] semana) {
-		addJanela(semana, "Horário");
+	public void editarHorario(HorarioSerie horario) {
+		Object[] args = {horario, "Horário x", new Boolean(true)};
+		addJanela(args);
+	}
+	
+	public void exibirHorario(HorarioSerie horario) {
+		String rname = horario.getCurso().getNome() + " - " + horario.getSerie().getOrdem() + "a série";
+		Object[] args = {horario, "Horário de " + rname, new Boolean(false)};
+		addJanela(args);
 		
+//		TesteHorario teste = new TesteHorario();
+//		semana = teste.getSemana();
+//		
+//		Vector<Disciplina> disciplinas = new Vector<Disciplina>();
+//		for (Curso curso : cursos) {
+//			for (Serie serie : curso.getSeries()) {
+//				disciplinas.addAll(serie.getDisciplinas());
+//			}
+//		}
+//		
+//		Object[] args = {horarios.get(0), "Horário (0)"};
+//	 	addJanela(args);
 	}
 	
 	public void exibirHorariosSalas(){
@@ -427,6 +555,14 @@ public class MainWindow extends JFrame {
 	public void setSalas(Vector<Sala> salas) {
 		this.salas = salas;
 	}
+	
+	public Vector<HorarioSerie> getAllHorarioSerie() {
+		return horarios_serie;
+	}
+
+	public void setAllHorarioSerie(Vector<HorarioSerie> horarios) {
+		this.horarios_serie = horarios;
+	}
 
 	public static void main(String[] args) {
 		try {
@@ -435,10 +571,8 @@ public class MainWindow extends JFrame {
 			e1.printStackTrace();
 		}
 		
-		
 		MainWindow note = new MainWindow();
 		note.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 	}
 
 }

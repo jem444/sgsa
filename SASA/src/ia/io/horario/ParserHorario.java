@@ -12,9 +12,7 @@ import ia.infra.negocio.sala.Sala;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -56,17 +54,19 @@ public class ParserHorario{
 		qtdHorario = 0;
 		int ishorario = 0;
 		int numeroAula = 0;
+		//int auxHorario = 0;//auxilia na hora de alocar no horario certo
 		HorarioSerie horarioSerie= null;
 		Serie serie = null;
 		Curso curso = null;
 		while ((nextLine = reader.next()) != null)//loop na linha
 		{
 			int diaSemana = 0;
-			
+
 			Disciplina disciplina = new Disciplina(null);
 			int cargaHoraria = 0;//Variavel parar ler as disciplinas
 			int abbrLido = 0;//Variavel parar ler as disciplinas
 			int countHora = 0;//variavel parar pegar o horario da aula
+			int controleSemana = 0;
 			for (int i = 0; i < nextLine.length; i++) {//loop da linha
 				System.out.println(nextLine[i]);
 				listaDados.add(nextLine[i]);
@@ -75,19 +75,25 @@ public class ParserHorario{
 					if ((nextLine[i]!= "")&&(nextLine[i]!=null)) {//verificar se o daddo não é nulo ou vazio
 						char c = nextLine[i].charAt(0);
 						if (c>=0X30 && c<=0X39){//verificar se é um numero
-							String[] numeroHora = nextLine[i].split(":");
+							String[] numeroHora = nextLine[i].split(":");//verifica se eh um horario
 							if (numeroHora.length>1) {
-								if (countHora>2) {
+								if (countHora>2) {//comecou uma nova horario de aula
 									countHora = 0;
 								}
 								countHora++;
-								if (countHora==2) {
+								if (countHora==2) {//horario de termino
+									ishorario++;
+									if (diaSemana>0&&(controleSemana==2)) {
+										controleSemana=0;
+										ishorario--;
+									}
+									controleSemana++;
+									
 									diaSemana = 0; 
-									numeroAula++;
 								}
 							}else{
 								horarioSerie = new HorarioSerie();
-								String[] semestre = nextLine[i].split("º");
+								String[] semestre = nextLine[i].split("º");//novo semestre para alocar novo horario
 								if (semestre.length>1) {
 									horarioSerie.setSemestre(Integer.parseInt(semestre[0]));
 									qtdHorario++;
@@ -97,48 +103,23 @@ public class ParserHorario{
 								}else{
 									cargaHoraria = Integer.parseInt(nextLine[i]);
 								}
-								
 								horarioSerie.setCurso(curso);
 								horarioSerie.setSerie(serie);
 								listaHorario.add(horarioSerie);
 								countHora=0;
 							}
 						}else{
-							
 							if (countHora == 2) {
 								countHora++;
 							}
 							if(i==0){
-								
-								String[] cursoSerie = nextLine[i].split(" ");
+								String[] cursoSerie = nextLine[i].split(" ");//curso especificado no arquivo esta curso e serie no msm campo
 								curso = new Curso(cursoSerie[0]);
-								//horarioSerie.setCurso(curso);
 								serie = new Serie(Integer.parseInt(cursoSerie[1]));
-								//horarioSerie.setSerie(serie);
 							}
 							if(cargaHoraria!=0){
 								abbrLido++;
-								switch (abbrLido) {
-								case 1:
-									disciplina = listaDisciplina.get(nextLine[i]);
-									disciplina.setNomeAbbr(nextLine[i]);
-									System.out.println("disc1");
-									break;
-								case 2:
-									disciplina.setNome(nextLine[i]);
-									System.out.println("disc2");
-									break;
-								case 3:
-									Professor professor = new Professor(nextLine[i]);
-									disciplina.setProfessor(professor);
-									System.out.println("disc3");
-									break;
-								default:
-									abbrLido = 0;
-									System.out.println("disc0");
-									break;
-								}
-
+								alocaCargaHoraria(nextLine[i], disciplina, abbrLido);
 							}}
 					}else
 						if (countHora == 2) {
@@ -150,42 +131,34 @@ public class ParserHorario{
 								diaSemana++;
 							}
 							if (diaSemana>=0&& diaSemana<7) {
-								//Atividade atividade = new
-								//Disciplina disciplina = new Disciplina();
-								//disciplina.setNmDisciplina(nextLine[i]);
-								listaHorario.get(ishorario).getSemana()[numeroAula-1][diaSemana].setNome(nextLine[i]);//adiciona na lista de horarios
-
-								Disciplina disc =new Disciplina(nextLine[i]);
-								Atividade  ativ = listaHorario.get(ishorario).getSemana()[numeroAula-1][diaSemana];
-								Aula aula = new Aula(ativ.getOrdem(),ativ.getInicio(), ativ.getTermino());
-					
-							//	disc.getAulas().add(aula);//adiciona na lista de diciplinas
-
-								this.listaDisciplina.put(nextLine[i], disc);
-								listaDisciplina.get(nextLine[i]).getAulas().add(aula);
-								lista.add(nextLine[i]);
-
-								System.out.println("aloca");
+								alocaDisciplinaHorario(nextLine[i], ishorario-1, numeroAula, diaSemana, countHora);
+								if (nextLine[i+1]==null) {//verificar se nao tem mais disciplinas no horario porem não foi preenchido todos os horarios
+									for (int j = diaSemana; j < 6; j++) {
+										listaHorario.get(ishorario+1).getSemana()[numeroAula][diaSemana].setNome("");
+										System.out.println("aloca nada");
+									}	
+								}
 								countHora++;
 								diaSemana++;
 							}else{
-								//listaHorario.add(horarioLocal);
 								diaSemana = 0;
 								ishorario++;
 							}
-							if (diaSemana==7) {
-								ishorario++;
-							}
-							
+							//							System.out.println("\n numAula: "+numeroAula);
+							//							System.out.println("diasemana: "+diaSemana);
+							//							System.out.println("ishario: "+ishorario+"\n ");
+
+							//							if (((numeroAula%2)==0)&&
+							//									(numeroAula<=30)&&
+							//									(diaSemana==6)) {
+							//								ishorario--;
+							//								numeroAula++;
+							//							}
 						}	
 					}
 					if (nextLine[i]==null) {
 						isNull++;
 						System.out.println(isNull);
-						//					if (isNull==139) {
-						//						result = true;
-						//						return result;
-						//					}
 					}
 				}else{
 					countCH++;
@@ -198,6 +171,51 @@ public class ParserHorario{
 		}
 		return result;
 	}
+	/**
+	 * 
+	 * @param next[i]
+	 * @param ishorario
+	 * @param numeroAula
+	 * @param diaSemana
+	 * @param countHora
+	 */
+	public void alocaDisciplinaHorario(String discplina, int ishorario, int numeroAula, int diaSemana, int countHora){
+		listaHorario.get(ishorario).getSemana()[numeroAula][diaSemana].setNome(discplina);//adiciona na lista de horarios
+
+		Disciplina disc =new Disciplina(discplina);
+		Atividade  ativ = listaHorario.get(ishorario).getSemana()[numeroAula][diaSemana];
+		Aula aula = new Aula(ativ.getOrdem(),ativ.getInicio(), ativ.getTermino());
+
+		this.listaDisciplina.put(discplina, disc);
+		listaDisciplina.get(discplina).getAulas().add(aula);
+		lista.add(discplina);
+		System.out.println("aloca");
+	}
+
+	public void alocaCargaHoraria(String disc, Disciplina disciplina,int abbrLido) {
+		switch (abbrLido) {
+		case 1:
+			disciplina = listaDisciplina.get(disc);
+			disciplina.setNomeAbbr(disc);
+			System.out.println("disc1");
+			break;
+		case 2:
+			disciplina.setNome(disc);
+			System.out.println("disc2");
+			break;
+		case 3:
+			Professor professor = new Professor(disc);
+			disciplina.setProfessor(professor);
+			System.out.println("disc3");
+			break;
+		default:
+			abbrLido = 0;
+			System.out.println("disc0");
+			break;
+		}
+	}
+
+
 	public void alocarHorario(Vector<Curso> cursos, Vector<Sala> salas) {
 
 		ModeloHorario modeloHorario = new ModeloHorario();

@@ -26,6 +26,6 @@ public class Aula extends Atividade {
 	}
 	@Override
 	public String toString() {
-		return "Disc: "+ disciplina+ "Nome"+ getNome().toString();
+		return "Disc: "+ this.getNome();
 	}
 }
