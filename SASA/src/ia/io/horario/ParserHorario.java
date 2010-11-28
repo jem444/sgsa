@@ -180,7 +180,11 @@ public class ParserHorario{
 					}
 					if (nextLine[i]==null) {
 						isNull++;
-						System.out.println(isNull);
+						System.out.println("linha: "+isNull);
+						if (isNull>=213) {
+							result = true;
+							return result;
+						}
 					}
 					
 				}else{
@@ -190,10 +194,7 @@ public class ParserHorario{
 						return result;
 					}
 				}
-				if (i==212) {
-					result = true;
-					return result;
-				}
+				
 			}
 		}
 		return result;
