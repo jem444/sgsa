@@ -58,6 +58,8 @@ public class ParserHorario{
 		HorarioSerie horarioSerie= null;
 		Serie serie = null;
 		Curso curso = null;
+		int controleSemana = 0;
+		boolean isnovo = false;
 		while ((nextLine = reader.next()) != null)//loop na linha
 		{
 			int diaSemana = 0;
@@ -66,7 +68,7 @@ public class ParserHorario{
 			int cargaHoraria = 0;//Variavel parar ler as disciplinas
 			int abbrLido = 0;//Variavel parar ler as disciplinas
 			int countHora = 0;//variavel parar pegar o horario da aula
-			int controleSemana = 0;
+
 			for (int i = 0; i < nextLine.length; i++) {//loop da linha
 				System.out.println(nextLine[i]);
 				listaDados.add(nextLine[i]);
@@ -77,35 +79,53 @@ public class ParserHorario{
 						if (c>=0X30 && c<=0X39){//verificar se é um numero
 							String[] numeroHora = nextLine[i].split(":");//verifica se eh um horario
 							if (numeroHora.length>1) {
+
 								if (countHora>2) {//comecou uma nova horario de aula
 									countHora = 0;
 								}
 								countHora++;
 								if (countHora==2) {//horario de termino
-									ishorario++;
-									if (diaSemana>0&&(controleSemana==2)) {
-										controleSemana=0;
-										ishorario--;
-									}
 									controleSemana++;
-									
-									diaSemana = 0; 
+									if ((controleSemana>2)) {
+//										if (isnovo) {
+//											controleSemana=1;
+//											ishorario++;
+//											//ishorario = listaHorario.size()-1;
+//										}else{
+											controleSemana=1;
+											ishorario--;
+											//ishorario = listaHorario.size()-2;
+											numeroAula++;
+									//	}
+									}else{
+										diaSemana = 0;
+										ishorario++;
+										//ishorario = listaHorario.size()-1;
+									}
+								}
+								if(isnovo){
+									isnovo = false;
+									ishorario = listaHorario.size()-2;
+									numeroAula = 0;
+									controleSemana=0;
 								}
 							}else{
-								horarioSerie = new HorarioSerie();
 								String[] semestre = nextLine[i].split("º");//novo semestre para alocar novo horario
 								if (semestre.length>1) {
+									horarioSerie = new HorarioSerie();
 									horarioSerie.setSemestre(Integer.parseInt(semestre[0]));
 									qtdHorario++;
-									if (qtdHorario==4) {
-										qtdHorario = 0;
-									}
+//									if (qtdHorario==4) {
+//										qtdHorario = 0;
+//									}
+									isnovo = true;
+									horarioSerie.setCurso(curso);
+									horarioSerie.setSerie(serie);
+									listaHorario.add(horarioSerie);
 								}else{
-									cargaHoraria = Integer.parseInt(nextLine[i]);
+									//cargaHoraria = Integer.parseInt(nextLine[i]);
 								}
-								horarioSerie.setCurso(curso);
-								horarioSerie.setSerie(serie);
-								listaHorario.add(horarioSerie);
+								
 								countHora=0;
 							}
 						}else{
@@ -127,22 +147,24 @@ public class ParserHorario{
 						}
 					if ((countHora>2)&&(nextLine[i]!=null)) {
 						if (countHora<9) {
-							if ((numeroAula==3)||(numeroAula==8)||(numeroAula==10)) {
-								diaSemana++;
+							if ((numeroAula==2)||(numeroAula==7)||(numeroAula==10)) {
+								numeroAula++;
 							}
 							if (diaSemana>=0&& diaSemana<7) {
 								alocaDisciplinaHorario(nextLine[i], ishorario-1, numeroAula, diaSemana, countHora);
-								if (nextLine[i+1]==null) {//verificar se nao tem mais disciplinas no horario porem não foi preenchido todos os horarios
-									for (int j = diaSemana; j < 6; j++) {
-										listaHorario.get(ishorario+1).getSemana()[numeroAula][diaSemana].setNome("");
-										System.out.println("aloca nada");
-									}	
-								}
 								countHora++;
 								diaSemana++;
+								if (nextLine[i+1]==null) {//verificar se nao tem mais disciplinas no horario porem não foi preenchido todos os horarios
+									for (int j = diaSemana; j < 6; j++) {
+										listaHorario.get(ishorario+1).getSemana()[numeroAula][diaSemana+1].setNome("");
+										System.out.println("aloca nada");
+										countHora++;
+										diaSemana++;
+									}	
+								}
 							}else{
-								diaSemana = 0;
-								ishorario++;
+								//diaSemana = 0;
+								//ishorario++;
 							}
 							//							System.out.println("\n numAula: "+numeroAula);
 							//							System.out.println("diasemana: "+diaSemana);
@@ -160,12 +182,17 @@ public class ParserHorario{
 						isNull++;
 						System.out.println(isNull);
 					}
+					
 				}else{
 					countCH++;
 					if (countCH > 4 ) {
 						result = true;
 						return result;
 					}
+				}
+				if (i==212) {
+					result = true;
+					return result;
 				}
 			}
 		}
