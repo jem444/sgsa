@@ -28,7 +28,7 @@ public class ModeloHorario {
 		Aula aula13 = new Aula(16, new Date(00,00,00,18,50), new Date(00,00,00,19,40));
 		Aula aula14 = new Aula(17, new Date(00,00,00,19,40), new Date(00,00,00,20,30));
 		Aula aula15 = new Aula(18, new Date(00,00,00,20,30), new Date(00,00,00,21,20));
-
+	//	Aula aula16 = new Aula(18, new Date(00,00,00,20,30), new Date(00,00,00,21,20));
 
 		this.atividades.add(aula01);
 		this.atividades.add(aula02);
@@ -43,6 +43,8 @@ public class ModeloHorario {
 		this.atividades.add(intervalo3);
 		this.atividades.add(aula09);
 		this.atividades.add(aula10);
+		this.atividades.add(aula11);
+		//this.atividades.add(intervalo4);
 		this.atividades.add(aula12);
 		this.atividades.add(aula13);
 		this.atividades.add(aula14);
