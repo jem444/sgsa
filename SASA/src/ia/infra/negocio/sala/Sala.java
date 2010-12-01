@@ -1,5 +1,8 @@
 package ia.infra.negocio.sala;
 
+import ia.infra.negocio.horario.HorarioSerie;
+import java.util.ArrayList;
+
 public class Sala {
 	private int id;
 	private String nome;
@@ -7,10 +10,17 @@ public class Sala {
 	private String bloco;
 	private String predio;
 	private int capacidade;
+	private ArrayList<HorarioSerie> listaHorario;
 	
 	public Sala(String nome, int capacidade) {
 		this.nome   = nome;
 		this.capacidade  = capacidade;
+		//this.listaAula = new Vector<Aula>();
+//		  for(int i = 0; i<=quantidade;i++){
+//              Aula aul = new Aula();
+//              aulas.add(aul);
+//          }
+		this.listaHorario= new ArrayList<HorarioSerie>();
 	}
 
 	public int getId() {
@@ -60,6 +70,13 @@ public class Sala {
 	public void setCapacidade(int capacidade) {
 		this.capacidade = capacidade;
 	}
-	
-	
+
+	public ArrayList<HorarioSerie> getListaHorario() {
+		return listaHorario;
+	}
+
+	public void setListaHorario(ArrayList<HorarioSerie> listaHorario) {
+		this.listaHorario = listaHorario;
+	}
+
 }

@@ -301,4 +301,16 @@ public class ParserHorario{
 		this.listaDisciplina = listaDisciplina;
 	}
 
+
+
+	public ArrayList<HorarioSerie> getListaHorario() {
+		return listaHorario;
+	}
+
+
+
+	public void setListaHorario(ArrayList<HorarioSerie> listaHorario) {
+		this.listaHorario = listaHorario;
+	}
+
 }
