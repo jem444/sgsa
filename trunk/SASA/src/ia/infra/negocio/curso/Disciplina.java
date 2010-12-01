@@ -2,10 +2,7 @@ package ia.infra.negocio.curso;
 
 import ia.infra.negocio.horario.Aula;
 import ia.infra.negocio.sala.Sala;
-
 import java.util.Vector;
-
-import com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter;
 
 public class Disciplina {
 	private int id;

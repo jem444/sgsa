@@ -4,6 +4,7 @@
  */
 package trabalhoia;
 
+import ia.infra.algoritmo.Ensalamento;
 import ia.io.curso.ParserCurso;
 import ia.io.horario.ParserHorario;
 import ia.io.sala.ParserSala;
@@ -35,6 +36,9 @@ public class Main {
 			//pc.getCursos();
 			ParserHorario ph = new ParserHorario(file);
 			ph.readFile();
+			Ensalamento ensala = new Ensalamento();
+			ensala.agruparHorarios(ph.getListaHorario().get(0));
+			System.out.println("fimm!!!");
 		}
 	}
 }

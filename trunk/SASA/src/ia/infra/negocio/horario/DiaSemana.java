@@ -2,13 +2,13 @@ package ia.infra.negocio.horario;
 
 public enum DiaSemana {
 	
-	DOMINGO (1),
-	SEGUNDA(2),
-	TERCAFEIRA (3),
-	QUARTAFEIRA(4),
-	QUITAFEIRA(5),
-	SEXTAFEIRA (6),
-	SABADO (7);
+	DOMINGO (0),
+	SEGUNDA(1),
+	TERCAFEIRA (2),
+	QUARTAFEIRA(3),
+	QUITAFEIRA(4),
+	SEXTAFEIRA (5),
+	SABADO (6);
 
 	private final byte value;
 
