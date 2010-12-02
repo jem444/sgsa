@@ -39,38 +39,49 @@
 5o, EE, 13, Operação de Sistemas de Potência, 12, 4, Robson.
 5o, EE, 13, Técinas de Alta Tensão, 10, 4, Tácio.
 5o, EE, 13, Transmissão de Energia Elétrica, 13, 4, Rocha.
-1o, CC, 38, Cálculo Diferencial e Integral, 40, 4, Zalewski.
-1o d, CC, 38, Cálculo Diferencial e Integral Desdobramento, 17, 4, Zalewski.
-1o, CC, 38, Computação I, 40, 5, Teresinha.
-1o d, CC, 38, Computação I Desdobramento, 15, 5, Andres.
-1o, CC, 38, Física Geral e Eletricidade Básica, 43, 4, Fernanda.
-1o d, CC, 38, Física Geral e Eletricidade Básica Desdobramento, 23, 4, Rosiney.
-1o, CC, 38, Geometria Analítica e Álgebra Linear, 40, 4, Cleverson.
-1o d, CC, 38, Geometria Analítica e Álgebra Linear Desdobramento, 21, 4, Cleverson.
-1o, CC, 38, Introdução à Ciência da Computação, 80, 2, Renato.
+1o, CC, 38, CÁLCULO, 40, 4, Zalewski.
+1o d, CC, 38, CÁLCULO (D), 17, 4, Zalewski.
+1o, CC, 38, COMPUTAÇÃO I, 40, 5, Teresinha.
+1o d, CC, 38, COMPUTAÇÃO I (D), 15, 5, Andres.
+1o, CC, 38, FÍSICA, 43, 4, Fernanda.
+1o d, CC, 38, FÍSICA (D), 23, 4, Rosiney.
+1o, CC, 38, GEOM ÁLG, 40, 4, Cleverson.
+1o d, CC, 38, GEOM ÁLG (D), 21, 4, Cleverson.
+1o, CC, 38, INTRODUÇÃO, 80, 2, Renato.
+1o, CC, 38, LÓGICA, 80, 2, Renato.
 1o, CC, 38, Lógica e Matemática Discreta, 43, 3, Wagner.
-1o, CC, 38, Probabilidade e Estatística, 56, 2, Carlos S.
-2o, CC, 25, Algoritmos e Estruturas de Dados, 25, 4, Andres.
-2o, CC, 25, Introdução à Arquitetura de Computadores, 30, 3, Zalewski.
-2o, CC, 25, Cálculo Numérico, 29, 3, André.
-2o, CC, 25, Computação II, 20, 4, Rômulo.
-2o, CC, 25, Linguagens Formais e Autômatos, 29, 2, Rômulo.
-2o d, CC, 25, Linguagens Formais e Autômatos Desdobramento, 9, 2, Rômulo.
-2o, CC, 25, Técnicas de Redação e Metodologia Científica, 30, 4, Leonilda.
-2o, CC, 25, Sistemas Digitais, 10, 4, Carlos F.
-3o, CC, 24, Projeto e Análise de Algoritmos, 27, 3, Rômulo.
-3o, CC, 24, Organização e Arquitetura de Computadores, 20, 3, Fabiana.
-3o, CC, 24, Banco de Dados, 26, 3, Gil.
-3o, CC, 24, Compiladores, 16, 2, Wagner.
-3o, CC, 24, Engenharia de Software I, 29, 4, Gil.
-3o, CC, 24, Formação Empreendedora, 26, 4, Shiro.
-3o, CC, 24, Sistemas Operacionais, 34, 4, Shiro.
-4o, CC, 17, Computação Gráfica, 12, 4, Fabiana.
-4o, CC, 17, Engenharia de Software II, 14, 4, Eliane.
-4o, CC, 17, Inteligência Artificial 1o Sem, 25, 4, Huei.
-4o, CC, 17, XML: Fundamentos e Aplicações, 15, 4, Rômulo.
-4o, CC, 17, Sistemas Distribuídos, 16, 4, Wagner.
-4o, CC, 17, Sistemas de Informação, 18, 4, André.
+1o, CC, 38, PROBABILIDADE, 56, 2, Carlos S.
+2o, CC, 25, ALGORITMOS, 25, 4, Andres.
+2o d, CC, 25, ALGORITMOS (D), 25, 4, Andres.
+2o, CC, 25, ARQUITETURA, 30, 3, Zalewski.
+2o, CC, 25, CÁLCULO NUM, 29, 3, André.
+2o, CC, 25, COMPUTAÇÃO II, 20, 4, Rômulo.
+2o d, CC, 25, COMPUTAÇÃO II (D), 20, 4, Rômulo.
+2o, CC, 25, CONCEITOS, 29, 2, Zalewski.
+2o, CC, 25, ENG DE SOFTW, 9, 2, Eliane.
+2o, CC, 25, LINGUAGENS, 29, 2, Rômulo.
+2o d, CC, 25, LINGUAGENS (D), 29, 2, Rômulo.
+2o, CC, 25, REDAÇÃO, 30, 4, Leonilda.
+2o, CC, 25, SIS DIGITAIS, 10, 4, Carlos F.
+3o, CC, 24, ALGORITMOS, 27, 3, Rômulo.
+3o, CC, 24, ARQUITETURA, 20, 3, Fabiana.
+3o, CC, 24, BANCO DE DADOS, 26, 3, Gil.
+3o, CC, 24, COMPILADORES, 16, 2, Wagner.
+3o, CC, 24, ENG DE SOFT I, 29, 4, Gil.
+3o, CC, 24, FORMAÇÃO, 26, 4, Shiro.
+3o, CC, 24, SIS OPER, 34, 4, Shiro.
+3o, CC, 24, EST SUP, 34, 6, Renato.
+4o, CC, 17, COMPUT GRÁF, 12, 2, Fabiana.
+4o, CC, 17, PROC IMAG, 12, 2, Fabiana.
+4o, CC, 17, ENG DE SOFT II, 14, 2, Eliane.
+4o, CC, 17, IA, 25, 4, Huei.
+4o, CC, 17, OPTATIVA I, 15, 2, Rômulo.
+4o, CC, 17, OPTATIVA II, 15, 2, Wagner.
+4o, CC, 17, OPTATIVA III, 15, 2, Wagner.
+4o, CC, 17, SIST DISTRIB, 16, 2, Huei.
+4o, CC, 17, SIST INFORM, 18, 2, André.
+4o, CC, 17, REDES (09), 18, 4, André.
+4o, CC, 17, TCC, 12, 6, Fabiana.
 1o, MA, 44, A Informática Aplicada à Educação Matemática, 40, 3, Fábio.
 1o, MA, 44, Cálculo I, 45, 6, Claiton.
 1o, MA, 44, Geometria Analítica, 42, 2, Kelly.
