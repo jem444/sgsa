@@ -51,7 +51,7 @@ public class Disciplina implements Serializable  {
 	
 	@Override
 	public String toString() {
-		return "Disc: "+ this.nome;
+		return this.nome;
 	}
 
 

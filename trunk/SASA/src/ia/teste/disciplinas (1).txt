@@ -1,2 +1,11 @@
-﻿1o, EE, 38, Computacao, 52, 4, Habib.
-1o, EE, 38, DesenhoTecnico, 42, 2, Muniz.
+﻿1o, CC, 24, CÁLCULO, 52, 4, ZALEWSKI.
+1o, CC, 24, CÁLCULO (D), 42, 2, ZALEWSKI.
+1o, CC, 24, COMPUTAÇÃO I, 52, 4, TERESINHA.
+1o, CC, 24, COMPUTAÇÃO I (D), 42, 2, ANDRÉS.
+1o, CC, 24, FÍSICA, 52, 4, FERNANDA.
+1o, CC, 24, FÍSICA (D), 42, 2, FERNANDA.
+1o, CC, 24, GEOM ÁLG, 52, 4, CLEVERSON.
+1o, CC, 24, GEOM ÁLG (D), 42, 2, CLEVERSON.
+1o, CC, 24, INTRODUÇÃO, 42, 2, RENATO.
+1o, CC, 24, LÓGICA, 52, 4, WAGNER.
+1o, CC, 24, PROBABILIDADE, 42, 2, CARLOS S.

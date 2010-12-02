@@ -41,8 +41,8 @@
 5o,EE,13,Operação de Sistemas de Potência,12,4,Robson
 5o,EE,13,Técinas de Alta Tensão,10,4,Tácio
 5o,EE,13,Transmissão de Energia Elétrica,13,4,Rocha
-1o,CC,38,Cálculo Diferencial e Integral,40,4,Zalewski
-1o d,CC,38,Cálculo Diferencial e Integral Desdobramento,17,4,Zalewski
+1o,CC,38,CÁLCULO, 40,4,Zalewski
+1o d,CC,38,CÁLCULO (D), 17,4,Zalewski
 1o,CC,38,Computação I,40,5,Teresinha
 1o d,CC,38,Computação I Desdobramento,15,5,Andres
 1o,CC,38,Física Geral e Eletricidade Básica,43,4,Fernanda

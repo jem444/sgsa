@@ -1,6 +1,7 @@
 package ia.gui.view;
 
 import ia.infra.algoritmo.BuscaProfundidade;
+import ia.infra.algoritmo.Ensalamento;
 import ia.infra.negocio.curso.Curso;
 import ia.infra.negocio.curso.Disciplina;
 import ia.infra.negocio.curso.Serie;
@@ -229,11 +230,13 @@ public class MainWindow extends JFrame {
 				sair();
 			} else
 			if (arg0.getSource()==mAplicarBuscaExaustiva){
-				BuscaProfundidade busca = new BuscaProfundidade(cursos, salas);
+				//shi/BuscaProfundidade busca = new BuscaProfundidade(cursos, salas);
 //				busca.aloca(busca.getTodasDisciplinas());
 //				busca.busca();
-				busca.busca2();
-				semana = busca.getSemana();
+				//shi/busca.busca2();
+				//shi/semana = busca.getSemana();
+				System.out.println("Ensalamento!!!!");
+				Ensalamento ensalamento = new Ensalamento(salas, horarios_serie, cursos);
 			} else
 			if (arg0.getSource()==mAplicarBuscaHeuristica){
 				((GridSalasInternalFrame)janelaSalas).setSalas(salas);
@@ -595,6 +598,7 @@ public class MainWindow extends JFrame {
 		}
 		
 		MainWindow note = new MainWindow();
+		
 		note.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
