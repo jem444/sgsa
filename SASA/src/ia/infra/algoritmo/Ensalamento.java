@@ -1,5 +1,6 @@
 package ia.infra.algoritmo;
 
+import ia.infra.negocio.curso.Curso;
 import ia.infra.negocio.horario.Atividade;
 import ia.infra.negocio.horario.DiaSemana;
 import ia.infra.negocio.horario.HorarioSerie;
@@ -16,9 +17,10 @@ import javax.swing.JFileChooser;
 
 public class Ensalamento {
 
-	private Vector<Sala> listaSala;
-	private ArrayList<HorarioSerie>  listaHorario;
-	private ArrayList<AgrupamentoAula> listaAgrupamentoAula ;
+	private Vector<Sala> listaSala;//listas das salas 
+	private ArrayList<HorarioSerie>  listaHorario;//lista dos horarios
+	private ArrayList<AgrupamentoAula> listaAgrupamentoAula ;//Agrupamento aula -- bloco das aulas juntas
+	private Vector<Curso> estruturaToda;//estrutura: Curso-->Series-->Disciplinas
 
 	public void profundidade() throws Exception{
 		System.out.println("Curso");

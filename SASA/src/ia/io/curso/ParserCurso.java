@@ -21,6 +21,10 @@ public class ParserCurso {
             this.file = filepath;
             //nothing else
         }
+        public ParserCurso() {
+            this.file = null;
+            //nothing else
+        }
 
         /***
          * getNewProfessor(String,Vector<Professor>)
@@ -30,7 +34,7 @@ public class ParserCurso {
          * @param professores
          * @return Professor
          */
-        private Professor getNewProfessor(String nome, Vector<Professor> professores) {
+        public Professor getNewProfessor(String nome, Vector<Professor> professores) {
             for (Professor prof : professores) {
                 if (prof.getNome().equals(nome)) {
                     return prof;
@@ -49,7 +53,7 @@ public class ParserCurso {
          * @param cursos
          * @return Curso
          */
-        private Curso getNewCurso(String nome, Vector<Curso> cursos) {
+        public Curso getNewCurso(String nome, Vector<Curso> cursos) {
             for (Curso curso : cursos) {
                 if (curso.getNome().equals(nome)) {
                     return curso;

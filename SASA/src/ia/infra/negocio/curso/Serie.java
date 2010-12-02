@@ -3,7 +3,8 @@ package ia.infra.negocio.curso;
 import java.io.Serializable;
 import java.util.Vector;
 
-public class Serie implements Serializable {
+public class Serie implements Serializable  {
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private int mediaDeMatriculados;
 	private int ordem;

@@ -7,6 +7,10 @@ import java.util.Date;
 import java.util.logging.SimpleFormatter;
 
 public class Atividade implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int ordem;
 	private String nome;
 	private String descricao;

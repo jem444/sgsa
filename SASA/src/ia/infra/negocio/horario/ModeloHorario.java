@@ -1,9 +1,11 @@
 package ia.infra.negocio.horario;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Vector;
 
-public class ModeloHorario {
+public class ModeloHorario implements Serializable  {
+	private static final long serialVersionUID = 1L;
 	private Vector<Atividade> atividades;
 	
 	public ModeloHorario() {
