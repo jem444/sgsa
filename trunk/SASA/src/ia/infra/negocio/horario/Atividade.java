@@ -1,11 +1,12 @@
 package ia.infra.negocio.horario;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.SimpleFormatter;
 
-public class Atividade {
+public class Atividade implements Serializable {
 	private int ordem;
 	private String nome;
 	private String descricao;
