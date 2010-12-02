@@ -1,8 +1,9 @@
 package ia.infra.negocio.curso;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Serie {
+public class Serie implements Serializable {
 	private int id;
 	private int mediaDeMatriculados;
 	private int ordem;

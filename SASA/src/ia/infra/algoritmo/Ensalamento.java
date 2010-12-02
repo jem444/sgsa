@@ -25,7 +25,7 @@ public class Ensalamento {
 		auxAlocaHorariosCursos();
 		System.out.println("Salas");
 		auxAlocaSalas();
-
+		
 
 
 	}

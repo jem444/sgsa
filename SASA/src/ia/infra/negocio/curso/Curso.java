@@ -1,8 +1,9 @@
 package ia.infra.negocio.curso;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Curso {
+public class Curso implements Serializable  {
 	private int id;
 	private String nome;
 	private String descricao;
