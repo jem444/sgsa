@@ -10,6 +10,7 @@ import ia.infra.negocio.sala.Sala;
 import ia.io.curso.ParserCurso;
 import ia.io.sala.ParserSala;
 import ia.teste.TesteHorario;
+import ia.teste.TesteSerialized;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -88,7 +89,7 @@ public class MainWindow extends JFrame {
 		mArquivoAbrir.setMnemonic('A');
 		mArquivoSalvar = new JMenuItem("Salvar");
 		mArquivoSalvar.setMnemonic('S');
-		mArquivoImprimir = new JMenuItem("Imprimir");
+		mArquivoImprimir = new JMenuItem("Importar");
 		mArquivoImprimir.setMnemonic('p');
 		mArquivoCarregarSalas       = new JMenuItem("Importar Salas");
 		mArquivoCarregarSalas.setMnemonic('l');
@@ -118,9 +119,9 @@ public class MainWindow extends JFrame {
 		mArquivo.add(mArquivoSair);
 		
 		
-		mArquivoAbrir.setEnabled(false);
-		mArquivoSalvar.setEnabled(false);
-		mArquivoImprimir.setEnabled(false);
+//		mArquivoAbrir.setEnabled(false);
+//		mArquivoSalvar.setEnabled(false);
+//		mArquivoImprimir.setEnabled(false);
 			
 		//----------------------------------------------
 		mOrganizar    = new JMenu("Organizar");
@@ -216,6 +217,13 @@ public class MainWindow extends JFrame {
 			} else
 			if (arg0.getSource()==mArquivoSalvar){
 				//salvarComo();
+				salvarTeste();
+				System.out.println("cc");
+			} else
+			if (arg0.getSource()==mArquivoImprimir){
+				obterTeste();
+				System.out.println("vv");
+
 			} else
 			if (arg0.getSource()==mArquivoSair){
 				sair();
@@ -275,6 +283,7 @@ public class MainWindow extends JFrame {
 
 		}
 	}
+	
 	
 	private JInternalFrame addJanela(Object bean, String titulo) {
 		JInternalFrame internal = new JInternalFrame();
@@ -562,6 +571,20 @@ public class MainWindow extends JFrame {
 
 	public void setAllHorarioSerie(Vector<HorarioSerie> horarios) {
 		this.horarios_serie = horarios;
+	}
+
+	public void salvarTeste() {
+		TesteSerialized t = new TesteSerialized();
+		t.salvaHorariosSerie(this.horarios_serie, this.cursos);
+		System.out.println(this.horarios_serie);
+		System.out.println(this.cursos);
+	}
+	public void obterTeste() {
+		TesteSerialized t = new TesteSerialized();
+		this.horarios_serie = t.obterHorariosSerie(this.horarios_serie, this.cursos);
+		this.cursos = t.obterCursos(this.horarios_serie, this.cursos);
+		System.out.println(this.horarios_serie);
+		System.out.println(this.cursos);
 	}
 
 	public static void main(String[] args) {

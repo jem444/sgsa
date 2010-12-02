@@ -1,9 +1,14 @@
 package ia.infra.negocio.horario;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Aula extends Atividade {
+public class Aula extends Atividade implements Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private String disciplina;
 	

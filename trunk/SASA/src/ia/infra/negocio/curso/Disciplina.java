@@ -2,9 +2,12 @@ package ia.infra.negocio.curso;
 
 import ia.infra.negocio.horario.Aula;
 import ia.infra.negocio.sala.Sala;
+
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Disciplina {
+public class Disciplina implements Serializable  {
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nome;
 	private String descricao;

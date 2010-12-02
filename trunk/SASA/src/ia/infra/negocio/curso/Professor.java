@@ -1,6 +1,9 @@
 package ia.infra.negocio.curso;
 
-public class Professor {
+import java.io.Serializable;
+
+public class Professor implements Serializable  {
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nome;
 	

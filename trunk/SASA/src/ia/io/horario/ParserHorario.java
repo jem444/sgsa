@@ -9,6 +9,7 @@ import ia.infra.negocio.horario.Aula;
 import ia.infra.negocio.horario.HorarioSerie;
 import ia.infra.negocio.horario.ModeloHorario;
 import ia.infra.negocio.sala.Sala;
+import ia.io.curso.ParserCurso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,6 +30,10 @@ public class ParserHorario{
 	private ArrayList<String> lista = new ArrayList<String>();
 	private ArrayList<HashMap<Integer, HashMap<Integer, String>>> listaHorarios = new ArrayList<HashMap<Integer, HashMap<Integer, String>>>();
 	int qtdHorario;
+	
+	Vector<Curso> cursos = new Vector<Curso>();
+	Vector<Professor> professores = new Vector<Professor>();
+	//Lista Horario alocado certo 
 	private ArrayList<HorarioSerie> listaHorario = new ArrayList<HorarioSerie>();
 
 	public ParserHorario(File filepath){
@@ -72,8 +77,8 @@ public class ParserHorario{
 			for (int i = 0; i < nextLine.length; i++) {//loop da linha
 				System.out.println(nextLine[i]);
 				listaDados.add(nextLine[i]);
-				int countCH=0;
-				if (nextLine[i]!="CH") {
+				int countCH = 0, auxCH = 0;
+				if ((nextLine[i]!="CH")) {
 					if ((nextLine[i]!= "")&&(nextLine[i]!=null)) {//verificar se o daddo não é nulo ou vazio
 						char c = nextLine[i].charAt(0);
 						if (c>=0X30 && c<=0X39){//verificar se é um numero
@@ -87,16 +92,16 @@ public class ParserHorario{
 								if (countHora==2) {//horario de termino
 									controleSemana++;
 									if ((controleSemana>2)) {
-//										if (isnovo) {
-//											controleSemana=1;
-//											ishorario++;
-//											//ishorario = listaHorario.size()-1;
-//										}else{
-											controleSemana=1;
-											ishorario--;
-											//ishorario = listaHorario.size()-2;
-											numeroAula++;
-									//	}
+										//										if (isnovo) {
+										//											controleSemana=1;
+										//											ishorario++;
+										//											//ishorario = listaHorario.size()-1;
+										//										}else{
+										controleSemana=1;
+										ishorario--;
+										//ishorario = listaHorario.size()-2;
+										numeroAula++;
+										//	}
 									}else{
 										diaSemana = 0;
 										ishorario++;
@@ -115,9 +120,9 @@ public class ParserHorario{
 									horarioSerie = new HorarioSerie();
 									horarioSerie.setSemestre(Integer.parseInt(semestre[0]));
 									qtdHorario++;
-//									if (qtdHorario==4) {
-//										qtdHorario = 0;
-//									}
+									//									if (qtdHorario==4) {
+									//										qtdHorario = 0;
+									//									}
 									isnovo = true;
 									horarioSerie.setCurso(curso);
 									horarioSerie.setSerie(serie);
@@ -125,7 +130,7 @@ public class ParserHorario{
 								}else{
 									//cargaHoraria = Integer.parseInt(nextLine[i]);
 								}
-								
+
 								countHora=0;
 							}
 						}else{
@@ -184,17 +189,54 @@ public class ParserHorario{
 						if (isNull>=213) {
 							result = true;
 							return result;
+							//file.
 						}
 					}
-					
+
 				}else{
-					countCH++;
-					if (countCH > 4 ) {
-						result = true;
-						return result;
+					if (countCH > 0 ) {
+						ParserCurso pc = new ParserCurso();
+						 Curso curs = pc.getNewCurso(listaHorario.get(0).getCurso().getNome(), cursos);
+	                        System.out.println("serie: " +listaHorario.get(0).getSerie().getOrdem());
+	                        //Serie srie = curs.getNewSerie(1);
+	                        Serie srie = curs.getNewSerie(listaHorario.get(0).getSerie().getOrdem());
+	                        srie.setMediaDeMatriculados(30);
+	                       
+	                        Disciplina disc = srie.getNewDisciplina(null, null);
+	                        disc.setNumeroDeMatriculados(30);
+	                        
+						if (!nextLine[i].equals("")) {
+							auxCH++;
+							switch (auxCH) {
+							case 1:
+								char c = nextLine[i].charAt(0);
+								if(c>=0X30 && c<=0X39){
+									int qtd=Integer.parseInt(nextLine[i]);
+									disc.criarAulas(Integer.parseInt(nextLine[i]));
+								}
+								break;
+							case 2:
+								String abr = nextLine[i];
+								disc.setNomeAbbr(nextLine[i]);
+								break;
+							case 3:
+								String desc = nextLine[i];
+								disc.setDescricao(nextLine[i]);
+								break;
+							case 4:
+								String professor = nextLine[i];
+								 Professor prof = pc.getNewProfessor(nextLine[i], professores);
+								 disc.setProfessor(prof);
+								break;
+							default:
+								break;
+							}
+						}
+					}else{
+						countCH++;
 					}
 				}
-				
+
 			}
 		}
 		return result;

@@ -6,9 +6,6 @@ import ia.infra.negocio.curso.Curso;
 import ia.infra.negocio.curso.Serie;
 
 public class HorarioSerie implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Atividade[][] semana;
 	private Curso curso;
