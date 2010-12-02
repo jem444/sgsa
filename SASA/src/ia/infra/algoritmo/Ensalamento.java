@@ -9,6 +9,9 @@ import ia.io.horario.ParserHorario;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.swing.JFileChooser;
@@ -23,6 +26,7 @@ public class Ensalamento {
 	private Vector<HorarioSerie>  listaHorario;//lista dos horarios
 	private Vector<Curso> estruturaToda;//estrutura: Curso-->Series-->Disciplinas
 	private ArrayList<ResultaConflitos> listaConflitosResto;//lista dos conflitos das alocações 
+	private ArrayList<ArrayList<HorarioSerie>> listaHorarioCursos;
 
 	public Ensalamento(Vector<Sala> listaSala,
 			Vector<HorarioSerie> listaHorario,
@@ -31,29 +35,72 @@ public class Ensalamento {
 		this.listaSala = listaSala;
 		this.listaHorario = listaHorario;
 		this.estruturaToda = estruturaToda;
+		this.listaConflitosResto = new ArrayList<ResultaConflitos>();
 		System.out.println("ensalamento carrega dados iniciais.");
+
+
+		//ArrayList<Integer> listaColisao = new ArrayList<Integer>();
 		
-		ArrayList<AgrupamentoAula> resto = new ArrayList<AgrupamentoAula>();
-		int conflito=0;
-		alocarDuasSeries(0,5,6,resto, conflito);
-		ResultaConflitos result = new ResultaConflitos(conflito,resto, listaHorario.get(0).getCurso().getNome(), listaHorario.get(0).getSemestre());
-		listaConflitosResto.add(result);
+		int serie1=0,serie2=0;
+		listaHorarioCursos = agruparCurso(this.listaHorario);
+		//ArrayList<AgrupamentoAula> resto = new ArrayList<AgrupamentoAula>();
+		//int conflito=0;
+//		Vector<Sala> listSala = new Vector<Sala>();
+//		HorarioSerie horario = new HorarioSerie();
+//		ArrayList<HorarioSerie> auxlistaSala = new ArrayList<HorarioSerie>();
+//		auxlistaSala.add(horario);
+//		resto = alocarDuasSeries(listaSala, listaHorarioCursos.get(1),0,0,1);
+		Vector<Sala> listSala = new Vector<Sala>();
+		listSala= (Vector<Sala>) listaSala.clone();
+		int indiceSala = 0;
+		for (int i = 0; i < listaHorarioCursos.size(); i++) {
+			ArrayList<HorarioSerie> listaHoraLocal = listaHorarioCursos.get(i);
+			//if (listaHoraLocal.get(0).getSemana()[0][0].getNome()!= "") {
+				for (int j = 0; j < listaHoraLocal.size(); j++) {
+					ArrayList<AgrupamentoAula> restoMenor = new ArrayList<AgrupamentoAula>();
+					for (int j2 = j+1; j2 < listaHoraLocal.size(); j2++) {
+						ArrayList<AgrupamentoAula> resto = new ArrayList<AgrupamentoAula>();
+						resto = alocarDuasSeries(listSala,listaHoraLocal,0,j,j2);
+						if (resto.size()!=0) {
+							if (restoMenor.size()==0) {
+								restoMenor = resto;
+								serie1 = j;
+								serie2 = j2;	
+							}						
+							int rest = Math.min(resto.size(), restoMenor.size());
+							if (rest == resto.size()) {
+								restoMenor = resto;
+								serie1 = j;
+								serie2 = j2;
+							}
+						}
+					}
+					restoMenor = alocarDuasSeries(this.listaSala, listaHoraLocal, indiceSala, serie1, serie2);
+					
+					listaHoraLocal.remove(serie1);
+					listaHoraLocal.remove(serie2);
+					indiceSala++;
+					j--;
+				}
+			//}
+		}
+		System.out.println("funfou?");
 	}
 
-	public void alocarDuasSeries(int idSala, int serie1, int serie2, ArrayList<AgrupamentoAula> resto, int confl) {
+	public ArrayList<AgrupamentoAula> alocarDuasSeries(Vector<Sala> listaSala, ArrayList<HorarioSerie> listahorariopar, int idSala, int serie1, int serie2) {
 		/*********Aloca primeiro horario para a primeira sala de aula ******/
 		//ArrayList<AgrupamentoAula> agrupa = agruparHorarios(listaHorario.get(5));
 		System.out.println("agrupado Horario");
-		criarNovoHorario (idSala, serie1);//cria horario na sala 
+		criarNovoHorario (listahorariopar, idSala, serie1);//cria horario na sala 
 		/**************************end aloca********************************/
 		int conflito=0;
 
-		ArrayList<AgrupamentoAula> agrupaHorario = agruparHorarios(listaHorario.get(serie2));
+		ArrayList<AgrupamentoAula> agrupaHorario = agruparHorarios(listahorariopar.get(serie2));
 		//ArrayList<AgrupamentoAula> agrupaSala = agruparHorarios(listaSala.get(idSala).getListaHorario().get(0));
 		HorarioSerie horarioSerieSala = new HorarioSerie();
 		horarioSerieSala = listaSala.get(idSala).getListaHorario().get(0);
 		HorarioSerie horarioSerieHorario = new HorarioSerie();
-		horarioSerieHorario = listaHorario.get(serie2);
+		horarioSerieHorario = listahorariopar.get(serie2);
 
 		for (int k = 0; k < agrupaHorario.size(); k++) {
 			int vazios = encontreVazios(listaSala.get(idSala).getListaHorario().get(0).getSemana(), agrupaHorario.get(k).getDiaSemana(), agrupaHorario.get(k).getHoraAula());
@@ -67,8 +114,7 @@ public class Ensalamento {
 				conflito++;
 			}
 		}
-		resto = agrupaHorario;
-		confl = conflito;
+		return agrupaHorario;
 	}
 
 	public int encontreVazios(Atividade[][] horario, int diaSemana, int hora){
@@ -87,14 +133,14 @@ public class Ensalamento {
 		return count;
 	}
 
-	public void criarNovoHorario (int idSala, int serie1){
+	public void criarNovoHorario (ArrayList<HorarioSerie> listahorariopar, int idSala, int serie1){
 		/*********Cria um horario para a sala******************/
 		HorarioSerie horarioSerie = new HorarioSerie();
-		horarioSerie.setSemestre(listaHorario.get(serie1).getSemestre());
-		horarioSerie.setCurso(listaHorario.get(serie1).getCurso());
-		horarioSerie.setSerie(listaHorario.get(serie1).getSerie());
+		horarioSerie.setSemestre(listahorariopar.get(serie1).getSemestre());
+		horarioSerie.setCurso(listahorariopar.get(serie1).getCurso());
+		horarioSerie.setSerie(listahorariopar.get(serie1).getSerie());
 		/****************end cria*************************************/
-		horarioSerie = listaHorario.get(serie1);
+		horarioSerie = listahorariopar.get(serie1);
 		listaSala.get(idSala).getListaHorario().add(horarioSerie);
 		System.out.println("Primeiro horario OK");
 	}
@@ -149,10 +195,31 @@ public class Ensalamento {
 		return listaAgrupamentoAula;
 	}
 
-	public void agruparCurso(Vector<HorarioSerie> listaHorarios){
-		
+	public ArrayList<ArrayList<HorarioSerie>> agruparCurso(Vector<HorarioSerie> listaHorarios){
+		String curso = "";
+		ArrayList<ArrayList<HorarioSerie>> result = new ArrayList<ArrayList<HorarioSerie>>();
+		ArrayList<HorarioSerie> listaHorarioCurso = null;
+
+		for (HorarioSerie horarioSerie : listaHorarios) {
+			if (curso.equals("")) {
+				curso = horarioSerie.getCurso().getNome();
+				listaHorarioCurso = new ArrayList<HorarioSerie>();
+			}
+			if (horarioSerie.getCurso().getNome().equals(curso)) {
+				listaHorarioCurso.add(horarioSerie);
+
+			}else{
+				curso = horarioSerie.getCurso().getNome();
+				result.add(listaHorarioCurso);
+				listaHorarioCurso = new ArrayList<HorarioSerie>();
+				listaHorarioCurso.add(horarioSerie);
+			}
+		}
+		//adicionando o ultimo curso selecionado.
+		result.add(listaHorarioCurso);
+		return result;
 	}
-	
+
 	/**
 	 * Ainda nao utilizada pois tem q terminar uma parte do parser 
 	 * @throws Exception
