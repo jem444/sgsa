@@ -1,0 +1,2 @@
+﻿1o, EE, 38, Computacao, 52, 4, Habib.
+1o, EE, 38, DesenhoTecnico, 42, 2, Muniz.
