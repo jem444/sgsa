@@ -1,34 +1,26 @@
 package ia.infra.algoritmo;
 
+import ia.infra.negocio.horario.HorarioSerie;
+
 import java.util.ArrayList;
 
 public class ResultaConflitos {
-	private String curso;
-	private int semestre;
-	private int conflito;
+	private HorarioSerie horario;
 	private ArrayList<AgrupamentoAula> listaAgrupamento;
 	
-	public ResultaConflitos(int conflito, ArrayList<AgrupamentoAula> listaAgrupamento, String curso, int semestre) {
-		this.conflito = conflito;
+	public ResultaConflitos(ArrayList<AgrupamentoAula> listaAgrupamento, HorarioSerie horario) {
+		
 		this.listaAgrupamento = listaAgrupamento;
-		this.curso = curso;
-		this.semestre = semestre;
+		this.setHorario(horario);
 	}
 	
 	public ResultaConflitos() {
-		this.conflito = 0;
+		
 		this.listaAgrupamento = new ArrayList<AgrupamentoAula>();
-		this.curso = "";
-		this.semestre = 0;
+		this.setHorario(new HorarioSerie());
 	}
 	
-	public void setConflito(int conflito) {
-		this.conflito = conflito;
-	}
 	
-	public int getConflito() {
-		return conflito;
-	}
 	
 	public void setListaAgrupamento(ArrayList<AgrupamentoAula> listaAgrupamento) {
 		this.listaAgrupamento = listaAgrupamento;
@@ -38,20 +30,13 @@ public class ResultaConflitos {
 		return listaAgrupamento;
 	}
 
-	public void setCurso(String curso) {
-		this.curso = curso;
+	public void setHorario(HorarioSerie horario) {
+		this.horario = horario;
 	}
 
-	public String getCurso() {
-		return curso;
+	public HorarioSerie getHorario() {
+		return horario;
 	}
 
-	public void setSemestre(int semestre) {
-		this.semestre = semestre;
-	}
-
-	public int getSemestre() {
-		return semestre;
-	}
 
 }

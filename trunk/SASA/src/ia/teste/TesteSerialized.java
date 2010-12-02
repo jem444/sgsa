@@ -18,7 +18,7 @@ public class TesteSerialized {
 	public void salvaHorariosSerie(Vector<HorarioSerie> horariosserie, Vector<Curso> cursos){
 		try {
 			System.out.println(horariosserie.size());
-			FileOutputStream fos = new FileOutputStream("teste.zebra");
+			FileOutputStream fos = new FileOutputStream("teste.hs");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(horariosserie);
 			oos.writeObject(cursos);
@@ -31,7 +31,7 @@ public class TesteSerialized {
 	public Vector<HorarioSerie> obterHorariosSerie(Vector<HorarioSerie> h, Vector<Curso> c){
 		
 		try {
-			FileInputStream fis   = new FileInputStream("teste.zebra");
+			FileInputStream fis   = new FileInputStream("teste.hs");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			h = (Vector<HorarioSerie>) ois.readObject();
 			System.out.println(h.size());
@@ -47,7 +47,7 @@ public class TesteSerialized {
 	public Vector<Curso> obterCursos(Vector<HorarioSerie> h, Vector<Curso> c){
 		
 		try {
-			FileInputStream fis   = new FileInputStream("teste.zebra");
+			FileInputStream fis   = new FileInputStream("teste.hs");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			h = (Vector<HorarioSerie>) ois.readObject();
 			System.out.println(h.size());
@@ -65,7 +65,7 @@ public class TesteSerialized {
 	public static Vector<Curso> obterCursos(){
 		
 		try {
-			FileInputStream fis   = new FileInputStream("teste2.zebra");
+			FileInputStream fis   = new FileInputStream("teste2.hs");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			return (Vector<Curso>) ois.readObject();
 		} catch (Exception e) {
@@ -77,7 +77,7 @@ public class TesteSerialized {
 	public static void salvaCursos(Vector<Curso> cursos){
 		try {
 			System.out.println(cursos.size());
-			FileOutputStream fos = new FileOutputStream("teste2.zebra");
+			FileOutputStream fos = new FileOutputStream("teste2.hs");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(cursos);
 			oos.close();
